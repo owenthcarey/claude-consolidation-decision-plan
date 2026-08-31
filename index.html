@@ -59,18 +59,19 @@
 
     .topbar span:last-child { color: var(--muted); }
 
-    .hero-goal {
+    .goal-card {
       display: grid;
-      grid-template-columns: 84px minmax(0, 1fr);
-      gap: 22px;
+      grid-template-columns: 90px minmax(0, 760px);
+      gap: 28px;
       align-items: baseline;
-      max-width: 680px;
-      margin-bottom: 30px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--line);
+      margin-top: 32px;
+      padding: 24px 28px 26px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: 0 8px 28px rgba(35, 38, 31, .035);
     }
 
-    .hero-goal span {
+    .goal-card span {
       color: var(--green);
       font-family: var(--mono);
       font-size: 11px;
@@ -79,11 +80,11 @@
       text-transform: uppercase;
     }
 
-    .hero-goal p {
+    .goal-card p {
       margin: 0;
       color: #383b35;
-      font-size: clamp(16px, 1.8vw, 19px);
-      font-weight: 560;
+      font-size: clamp(17px, 1.9vw, 20px);
+      font-weight: 570;
       letter-spacing: -.012em;
       line-height: 1.4;
     }
@@ -93,7 +94,7 @@
       grid-template-columns: minmax(0, 1.45fr) minmax(300px, .7fr);
       gap: clamp(32px, 6vw, 80px);
       align-items: end;
-      padding: clamp(64px, 10vw, 120px) 0 56px;
+      padding: clamp(54px, 8vw, 96px) 0 56px;
     }
 
     .eyebrow, .section-label {
@@ -662,7 +663,7 @@
       .wrap { width: min(100% - 24px, 1100px); }
       .topbar { min-height: 56px; }
       .topbar span:last-child { display: none; }
-      .hero-goal { grid-template-columns: 1fr; gap: 7px; }
+      .goal-card { grid-template-columns: 1fr; gap: 7px; padding: 20px; }
       .hero { padding-top: 54px; }
       h1 { font-size: clamp(48px, 16vw, 70px); }
       .facts, .steps { grid-template-columns: 1fr; }
@@ -691,13 +692,14 @@
     <span>Management brief · August 2026</span>
   </header>
 
+  <div class="wrap goal-card" aria-label="Project goal">
+    <span>Goal</span>
+    <p>Reduce company-wide Claude costs without limiting valuable usage or creating security and operational risk.</p>
+  </div>
+
   <main>
     <div class="wrap hero">
       <div>
-        <div class="hero-goal" aria-label="Project goal">
-          <span>Goal</span>
-          <p>Reduce company-wide Claude costs without limiting valuable usage or creating security and operational risk.</p>
-        </div>
         <p class="eyebrow">Recommendation</p>
         <h1>Don’t build it yet.</h1>
         <p class="hero-copy">First cancel unused accounts and downgrade low-use Max users. Consider a Concierge only after a short pilot proves it saves more money and employee time than it costs.</p>
