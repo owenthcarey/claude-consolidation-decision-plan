@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A financially gated plan for right-sizing RMS Claude subscriptions before investing in a shared Teams-to-PR Concierge.">
+  <meta name="theme-color" content="#f3f4ef">
+  <title>Right-Size First — RMS Claude Consolidation</title>
+  <style>
+    :root {
+      --paper: #f3f4ef;
+      --paper-2: #e9ebe4;
+      --panel: rgba(255, 255, 252, .72);
+      --ink: #1c1d1b;
+      --muted: #6b6e67;
+      --line: rgba(28, 29, 27, .14);
+      --line-strong: rgba(28, 29, 27, .28);
+      --coral: #fa654a;
+      --coral-soft: #ffe0d8;
+      --blue: #4778ff;
+      --blue-soft: #dce5ff;
+      --mint: #1eaa7b;
+      --mint-soft: #d6f2e7;
+      --violet: #7a67e8;
+      --violet-soft: #e5e0ff;
+      --amber: #c38217;
+      --amber-soft: #f6e8c8;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --radius: 20px;
+      --shadow: 0 18px 70px rgba(28, 29, 27, .07);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 88% 5%, rgba(71,120,255,.09), transparent 23rem),
+        radial-gradient(circle at 8% 42%, rgba(250,101,74,.07), transparent 26rem),
+        var(--paper);
+      font-family: var(--sans);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+    ::selection { background: var(--coral-soft); }
+
+    .topbar {
+      width: min(1460px, calc(100% - 40px));
+      margin: 18px auto 0;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,252,.72);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      box-shadow: 0 8px 30px rgba(28,29,27,.04);
+    }
+
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 720; letter-spacing: -.02em; }
+    .brand-mark {
+      width: 28px; height: 28px; border: 1px solid var(--ink); border-radius: 8px;
+      display: grid; place-items: center; font: 700 10px/1 var(--mono); background: var(--ink); color: white;
+      box-shadow: inset 0 0 0 4px rgba(255,255,255,.12);
+    }
+    .status { display: flex; align-items: center; gap: 9px; color: var(--muted); font: 600 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 5px rgba(30,170,123,.12); }
+
+    .layout {
+      width: min(1460px, calc(100% - 40px));
+      margin: 78px auto 0;
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: clamp(34px, 6vw, 96px);
+    }
+
+    .rail { position: relative; min-width: 0; }
+    .rail-inner { position: sticky; top: 110px; }
+    .rail-label { margin-bottom: 18px; color: var(--muted); font: 600 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .12em; }
+    .rail nav { display: grid; gap: 4px; }
+    .rail a {
+      padding: 8px 10px; border-radius: 9px; color: var(--muted); font-size: 13px; text-decoration: none;
+      border-left: 2px solid transparent; transition: .2s ease;
+    }
+    .rail a:hover, .rail a:focus-visible { color: var(--ink); background: rgba(255,255,255,.48); border-left-color: var(--coral); outline: none; }
+    .rail-note { margin-top: 34px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; color: var(--muted); font-size: 12px; background: rgba(255,255,255,.38); }
+
+    main { min-width: 0; }
+    section { scroll-margin-top: 110px; }
+
+    .hero { max-width: 1040px; padding-bottom: 84px; }
+    .eyebrow { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font: 600 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .1em; }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--coral); }
+    h1 {
+      max-width: 960px; margin: 22px 0 26px;
+      font-size: clamp(58px, 8.1vw, 128px); line-height: .87; letter-spacing: -.075em; font-weight: 690;
+    }
+    .hero-accent { color: var(--coral); }
+    .lede { max-width: 830px; margin: 0; color: #454842; font-size: clamp(20px, 2.1vw, 31px); line-height: 1.3; letter-spacing: -.025em; }
+    .recommendation {
+      margin-top: 42px; padding: 23px 25px; max-width: 900px; display: grid; grid-template-columns: auto 1fr; gap: 17px;
+      border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow);
+    }
+    .recommendation .badge { width: 37px; height: 37px; border-radius: 50%; display: grid; place-items: center; background: var(--coral); color: white; font: 700 13px/1 var(--mono); }
+    .recommendation strong { display: block; margin-bottom: 5px; font-size: 16px; }
+    .recommendation p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .metric-strip {
+      margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .metric { padding: 20px 20px 22px 0; }
+    .metric + .metric { padding-left: 24px; border-left: 1px solid var(--line); }
+    .metric-label { color: var(--muted); font: 600 10px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .09em; }
+    .metric-value { margin-top: 6px; font-size: clamp(25px, 3vw, 42px); letter-spacing: -.045em; font-weight: 680; }
+    .metric small { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; }
+
+    .chapter { padding: 90px 0; border-top: 1px solid var(--line); }
+    .chapter-head { display: grid; grid-template-columns: minmax(220px, .72fr) minmax(340px, 1.28fr); gap: clamp(28px, 7vw, 100px); margin-bottom: 50px; }
+    .chapter-index { color: var(--muted); font: 600 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    h2 { margin: 13px 0 0; font-size: clamp(37px, 4.8vw, 70px); line-height: .99; letter-spacing: -.055em; font-weight: 650; }
+    .chapter-intro { align-self: end; max-width: 660px; color: #4f524c; font-size: 18px; }
+    .chapter-intro p { margin: 0; }
+
+    .diagram {
+      border: 1px solid var(--line-strong); border-radius: 22px; overflow: hidden; background: rgba(255,255,252,.52); box-shadow: var(--shadow);
+    }
+    .diagram-bar { min-height: 46px; padding: 0 17px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.42); }
+    .diagram-title { font: 650 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .diagram-meta { color: var(--muted); font: 500 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    .diagram-foot { padding: 13px 17px; border-top: 1px solid var(--line); color: var(--muted); font: 500 11px/1.5 var(--mono); background: rgba(255,255,255,.28); }
+
+    .decision-flow { padding: clamp(24px, 5vw, 64px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; gap: 42px; min-height: 350px; }
+    .flow-step { position: relative; min-height: 170px; padding: 19px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--line-strong); border-radius: 16px; background: rgba(255,255,255,.62); }
+    .flow-step:not(:last-child)::after { content: ""; position: absolute; width: 43px; height: 1px; right: -43px; top: 50%; background: var(--line-strong); }
+    .flow-step:not(:last-child)::before { content: ""; position: absolute; width: 7px; height: 7px; right: -46px; top: calc(50% - 3px); border-radius: 50%; background: var(--ink); z-index: 2; }
+    .step-no { font: 650 10px/1 var(--mono); color: var(--muted); letter-spacing: .08em; }
+    .step-name { margin-top: 20px; font-size: 21px; font-weight: 650; letter-spacing: -.03em; }
+    .step-copy { margin-top: 8px; color: var(--muted); font-size: 12px; }
+    .step-state { display: flex; align-items: center; gap: 8px; margin-top: 18px; font: 650 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    .step-state::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .flow-step.audit { box-shadow: inset 0 3px 0 var(--blue); }
+    .flow-step.audit .step-state { color: var(--blue); }
+    .flow-step.rightsize { box-shadow: inset 0 3px 0 var(--mint); }
+    .flow-step.rightsize .step-state { color: var(--mint); }
+    .flow-step.baseline { box-shadow: inset 0 3px 0 var(--violet); }
+    .flow-step.baseline .step-state { color: var(--violet); }
+    .flow-step.gate { border-color: rgba(250,101,74,.48); box-shadow: 0 0 0 6px rgba(250,101,74,.07), inset 0 3px 0 var(--coral); }
+    .flow-step.gate .step-state { color: var(--coral); }
+    .pulse { animation: pulse 2.8s ease-in-out infinite; }
+
+    .comparison-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; }
+    .scenario-card, .simulator { border: 1px solid var(--line-strong); border-radius: 20px; background: rgba(255,255,252,.55); overflow: hidden; }
+    .card-head { padding: 15px 18px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+    .card-head strong { font-size: 13px; }
+    .card-head span { color: var(--muted); font: 500 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    .bars { padding: 23px 20px 27px; display: grid; gap: 21px; }
+    .bar-row { display: grid; grid-template-columns: 148px 1fr 92px; gap: 15px; align-items: center; }
+    .bar-label { font-size: 13px; }
+    .bar-track { height: 13px; border-radius: 20px; background: var(--paper-2); overflow: hidden; border: 1px solid rgba(28,29,27,.06); }
+    .bar-fill { height: 100%; width: var(--w); border-radius: inherit; background: var(--color); transform-origin: left; animation: grow 1.2s cubic-bezier(.22,.8,.2,1) both; }
+    .bar-value { text-align: right; font: 650 12px/1 var(--mono); }
+    .scenario-note { padding: 16px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+
+    .sim-controls { padding: 21px 20px 16px; display: grid; gap: 18px; }
+    .control-row { display: grid; gap: 8px; }
+    .control-top { display: flex; justify-content: space-between; gap: 15px; font-size: 12px; }
+    .control-value { font: 650 11px/1 var(--mono); }
+    input[type="range"] { width: 100%; accent-color: var(--coral); cursor: pointer; }
+    .sim-result { padding: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; border-top: 1px solid var(--line); background: rgba(255,255,255,.35); }
+    .result-cell { min-width: 0; }
+    .result-label { color: var(--muted); font: 600 9px/1.35 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+    .result-value { margin-top: 5px; font-size: 22px; line-height: 1.05; font-weight: 690; letter-spacing: -.04em; }
+    .result-value.negative { color: var(--coral); }
+
+    .formula { margin-top: 24px; padding: 21px 23px; display: flex; align-items: center; justify-content: center; text-align: center; min-height: 96px; border: 1px dashed var(--line-strong); border-radius: 18px; background: rgba(255,255,255,.26); font: 620 clamp(13px, 1.4vw, 18px)/1.6 var(--mono); }
+    .formula .plus { color: var(--mint); }
+    .formula .minus { color: var(--coral); }
+
+    .architecture { padding: clamp(18px, 4vw, 44px); display: grid; gap: 24px; }
+    .lane { display: grid; grid-template-columns: 145px minmax(0, 1fr); gap: 22px; align-items: stretch; }
+    .lane-tag { padding: 14px 0; color: var(--muted); font: 650 10px/1.5 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .node-chain { min-width: 0; display: grid; grid-template-columns: repeat(5, minmax(110px, 1fr)); align-items: center; gap: 26px; }
+    .node-chain.direct { grid-template-columns: repeat(3, minmax(130px, 1fr)); }
+    .node { position: relative; min-height: 94px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--line-strong); border-radius: 14px; background: rgba(255,255,255,.62); }
+    .node:not(:last-child)::after { content: "→"; position: absolute; right: -22px; top: calc(50% - 10px); color: var(--muted); font: 600 18px/1 var(--mono); }
+    .node-kicker { color: var(--muted); font: 600 9px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .node-name { margin-top: 12px; font-size: 14px; font-weight: 670; letter-spacing: -.02em; }
+    .node-meta { margin-top: 5px; color: var(--muted); font: 500 9px/1.4 var(--mono); }
+    .node.standard { box-shadow: inset 0 3px 0 var(--blue); }
+    .node.premium { box-shadow: inset 0 3px 0 var(--violet); }
+    .node.teams { box-shadow: inset 0 3px 0 var(--blue); }
+    .node.concierge { border-color: rgba(250,101,74,.5); box-shadow: 0 0 0 5px rgba(250,101,74,.06), inset 0 3px 0 var(--coral); }
+    .node.agent { box-shadow: inset 0 3px 0 var(--violet); }
+    .node.repo { box-shadow: inset 0 3px 0 var(--amber); }
+    .node.pr { box-shadow: inset 0 3px 0 var(--mint); }
+    .management-plane { margin-top: 8px; padding: 17px; border: 1px dashed var(--line-strong); border-radius: 15px; display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+    .plane-label { margin-right: 10px; color: var(--muted); font: 650 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .chip { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.52); font: 550 10px/1 var(--mono); }
+
+    .policy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 26px; }
+    .policy-card { padding: 22px; border-radius: 18px; border: 1px solid var(--line-strong); background: rgba(255,255,252,.48); }
+    .policy-card .policy-label { font: 650 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .policy-card h3 { margin: 22px 0 9px; font-size: 24px; letter-spacing: -.035em; }
+    .policy-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .policy-card.api { border-color: rgba(30,170,123,.38); background: linear-gradient(135deg, rgba(214,242,231,.7), rgba(255,255,252,.46)); }
+    .policy-card.pool { border-color: rgba(250,101,74,.38); background: linear-gradient(135deg, rgba(255,224,216,.72), rgba(255,255,252,.46)); }
+
+    .timeline { position: relative; display: grid; gap: 0; border-top: 1px solid var(--line-strong); }
+    .phase { display: grid; grid-template-columns: 120px 1fr auto; gap: 24px; padding: 27px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .phase-no { color: var(--muted); font: 650 10px/1.5 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .phase h3 { margin: 0 0 7px; font-size: 20px; letter-spacing: -.025em; }
+    .phase p { max-width: 730px; margin: 0; color: var(--muted); font-size: 13px; }
+    .phase-state { padding: 7px 10px; border-radius: 999px; font: 650 9px/1 var(--mono); text-transform: uppercase; letter-spacing: .07em; white-space: nowrap; }
+    .phase-state.now { color: #0e6e51; background: var(--mint-soft); }
+    .phase-state.gate { color: #8d3e2c; background: var(--coral-soft); }
+    .phase-state.hold { color: #5544a5; background: var(--violet-soft); }
+
+    .data-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; counter-reset: data; }
+    .data-item { position: relative; padding: 18px 18px 18px 54px; min-height: 92px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,255,252,.42); color: #4f524c; font-size: 13px; }
+    .data-item::before { counter-increment: data; content: "0" counter(data); position: absolute; left: 17px; top: 19px; color: var(--coral); font: 700 11px/1 var(--mono); }
+
+    .decision-box { padding: clamp(28px, 6vw, 70px); border-radius: 24px; border: 1px solid var(--ink); background: var(--ink); color: white; box-shadow: 0 24px 90px rgba(28,29,27,.18); }
+    .decision-box .chapter-index { color: rgba(255,255,255,.5); }
+    .decision-box h2 { max-width: 800px; }
+    .decision-actions { margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.18); }
+    .decision-action { padding: 22px 22px 8px 0; }
+    .decision-action + .decision-action { padding-left: 22px; border-left: 1px solid rgba(255,255,255,.18); }
+    .decision-action .n { color: var(--coral); font: 700 10px/1 var(--mono); }
+    .decision-action strong { display: block; margin: 14px 0 6px; font-size: 14px; }
+    .decision-action p { margin: 0; color: rgba(255,255,255,.58); font-size: 12px; }
+
+    footer { width: min(1460px, calc(100% - 40px)); margin: 100px auto 24px; padding: 25px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 30px; color: var(--muted); font-size: 11px; }
+    footer a { text-underline-offset: 3px; }
+
+    @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 5px rgba(250,101,74,.06), inset 0 3px 0 var(--coral); } 50% { box-shadow: 0 0 0 10px rgba(250,101,74,.1), inset 0 3px 0 var(--coral); } }
+    @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    @media (max-width: 1040px) {
+      .layout { grid-template-columns: 1fr; margin-top: 55px; }
+      .rail-inner { position: static; }
+      .rail-label, .rail-note { display: none; }
+      .rail, .rail-inner, .rail nav { min-width: 0; max-width: 100%; }
+      .rail nav { width: 100%; display: flex; overflow-x: auto; padding-bottom: 8px; }
+      .rail a { white-space: nowrap; border-left: 0; border-bottom: 2px solid transparent; }
+      .rail a:hover, .rail a:focus-visible { border-left: 0; border-bottom-color: var(--coral); }
+      .decision-flow { grid-template-columns: repeat(2, 1fr); }
+      .flow-step:nth-child(2)::after, .flow-step:nth-child(2)::before { display: none; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .node-chain { grid-template-columns: repeat(3, minmax(120px, 1fr)); }
+      .node-chain .node:nth-child(3)::after { display: none; }
+      .decision-actions { grid-template-columns: repeat(2, 1fr); }
+      .decision-action:nth-child(3) { border-left: 0; padding-left: 0; }
+    }
+
+    @media (max-width: 720px) {
+      .topbar, .layout, footer { width: min(100% - 24px, 1460px); }
+      .topbar { top: 6px; margin-top: 7px; padding: 12px; }
+      .brand span:last-child { display: none; }
+      .status { font-size: 9px; }
+      .layout { gap: 26px; }
+      .hero { padding-bottom: 62px; }
+      h1 { font-size: clamp(53px, 17vw, 82px); }
+      .lede { font-size: 19px; }
+      .recommendation { grid-template-columns: 1fr; }
+      .metric-strip { grid-template-columns: 1fr; }
+      .metric + .metric { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+      .chapter { padding: 66px 0; }
+      .chapter-head { grid-template-columns: 1fr; gap: 24px; }
+      .chapter-intro { font-size: 16px; }
+      .decision-flow { grid-template-columns: 1fr; gap: 28px; }
+      .flow-step { min-height: 135px; }
+      .flow-step:not(:last-child)::after { width: 1px; height: 29px; right: auto; left: 50%; top: auto; bottom: -29px; }
+      .flow-step:not(:last-child)::before { right: auto; left: calc(50% - 3px); top: auto; bottom: -32px; }
+      .flow-step:nth-child(2)::after, .flow-step:nth-child(2)::before { display: block; }
+      .bar-row { grid-template-columns: 105px 1fr 72px; gap: 8px; }
+      .lane { grid-template-columns: 1fr; gap: 5px; }
+      .node-chain, .node-chain.direct { grid-template-columns: 1fr; gap: 20px; }
+      .node:not(:last-child)::after { content: "↓"; right: auto; left: calc(50% - 6px); top: auto; bottom: -18px; }
+      .node-chain .node:nth-child(3)::after { display: block; }
+      .policy-grid, .data-list { grid-template-columns: 1fr; }
+      .phase { grid-template-columns: 84px 1fr; }
+      .phase-state { grid-column: 2; justify-self: start; }
+      .decision-actions { grid-template-columns: 1fr; }
+      .decision-action, .decision-action + .decision-action { padding: 20px 0; border-left: 0; border-bottom: 1px solid rgba(255,255,255,.16); }
+      footer { flex-direction: column; margin-top: 60px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+
+    @media print {
+      .topbar { position: static; }
+      .rail { display: none; }
+      .layout { display: block; width: 100%; }
+      body { background: white; }
+      .chapter { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">RMS</span><span>Claude consolidation</span></div>
+    <div class="status"><span class="status-dot" aria-hidden="true"></span>Draft · finance gate applied</div>
+  </header>
+
+  <div class="layout">
+    <aside class="rail" aria-label="Page navigation">
+      <div class="rail-inner">
+        <div class="rail-label">Revised plan / 2026</div>
+        <nav>
+          <a href="#recommendation">Recommendation</a>
+          <a href="#sequence">Sequence</a>
+          <a href="#economics">Economics</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#rollout">Rollout</a>
+          <a href="#inputs">Inputs</a>
+          <a href="#decisions">Decisions</a>
+        </nav>
+        <div class="rail-note">The baseline is no longer today's spend. It is the cost after unused accounts are canceled and low-use Max users are downgraded.</div>
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero" id="recommendation">
+        <div class="eyebrow">RMS Engineering Platform · revised proposal</div>
+        <h1>Right-size first.<br><span class="hero-accent">Automate second.</span></h1>
+        <p class="lede">The cheapest version of this project may be no project at all. Capture the easy subscription savings now; build the Concierge only when measured automation value clears a financial gate.</p>
+
+        <div class="recommendation">
+          <div class="badge">01</div>
+          <div>
+            <strong>Executive recommendation</strong>
+            <p>Approve the audit, cancellations, downgrades, and managed-seat consolidation. Do not approve a company-wide Concierge yet. Authorize only a capped pilot if management wants to test Teams-to-PR automation after rightsizing.</p>
+          </div>
+        </div>
+
+        <div class="metric-strip" aria-label="Key financial facts">
+          <div class="metric">
+            <div class="metric-label">Max 5× → $20 plan</div>
+            <div class="metric-value">−$80</div>
+            <small>per low-use person / month</small>
+          </div>
+          <div class="metric">
+            <div class="metric-label">35 Standard seats</div>
+            <div class="metric-value">$700</div>
+            <small>maximum avoidable monthly seat cost</small>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Build status</div>
+            <div class="metric-value">Gated</div>
+            <small>pilot evidence required</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="sequence">
+        <div class="chapter-head">
+          <div>
+            <div class="chapter-index">01 / The sequence</div>
+            <h2>Take the free savings before buying software.</h2>
+          </div>
+          <div class="chapter-intro"><p>The initial plan jumped from sixty accounts to a presumed seat map and bot. The revised plan inserts the missing counterfactual: cancel and downgrade first, then decide whether any problem remains worth automating.</p></div>
+        </div>
+
+        <figure class="diagram" aria-labelledby="sequence-title">
+          <div class="diagram-bar"><span class="diagram-title" id="sequence-title">Decision pipeline</span><span class="diagram-meta">Each gate may stop the project</span></div>
+          <div class="decision-flow">
+            <div class="flow-step audit">
+              <div><div class="step-no">STEP 01</div><div class="step-name">Audit</div><div class="step-copy">Invoices, renewals, active days, limits, workflows.</div></div>
+              <div class="step-state">Discover</div>
+            </div>
+            <div class="flow-step rightsize">
+              <div><div class="step-no">STEP 02</div><div class="step-name">Right-size</div><div class="step-copy">Cancel unused accounts. Downgrade light Max users.</div></div>
+              <div class="step-state">Save now</div>
+            </div>
+            <div class="flow-step baseline">
+              <div><div class="step-no">STEP 03</div><div class="step-name">Baseline</div><div class="step-copy">Measure optimized spend—not today's inflated total.</div></div>
+              <div class="step-state">Set C₀</div>
+            </div>
+            <div class="flow-step gate pulse">
+              <div><div class="step-no">GATE 01</div><div class="step-name">Still worth it?</div><div class="step-copy">Pilot only if access or automation value remains.</div></div>
+              <div class="step-state">Stop / proceed</div>
+            </div>
+          </div>
+          <figcaption class="diagram-foot">OUTCOME → Rightsizing is mandatory. The Concierge is conditional.</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" id="economics">
+        <div class="chapter-head">
+          <div>
+            <div class="chapter-index">02 / Economics</div>
+            <h2>Compare against the optimized baseline.</h2>
+          </div>
+          <div class="chapter-intro"><p>Sixty accounts tell us almost nothing. The mix could cost $1,200 or $12,000 per month. Build economics depend on the remaining seats, measured API usage, operating cost, implementation cost, and quantified labor value.</p></div>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="scenario-card">
+            <div class="card-head"><strong>Current-spend sensitivity</strong><span>Illustrative / monthly</span></div>
+            <div class="bars" aria-label="Illustrative current monthly subscription spending">
+              <div class="bar-row"><div class="bar-label">60 × Pro</div><div class="bar-track"><div class="bar-fill" style="--w:10%;--color:var(--blue)"></div></div><div class="bar-value">$1,200</div></div>
+              <div class="bar-row"><div class="bar-label">30 Pro / 30 Max</div><div class="bar-track"><div class="bar-fill" style="--w:30%;--color:var(--violet)"></div></div><div class="bar-value">$3,600</div></div>
+              <div class="bar-row"><div class="bar-label">60 × Max 5×</div><div class="bar-track"><div class="bar-fill" style="--w:50%;--color:var(--coral)"></div></div><div class="bar-value">$6,000</div></div>
+              <div class="bar-row"><div class="bar-label">60 × Max 20×</div><div class="bar-track"><div class="bar-fill" style="--w:100%;--color:var(--ink)"></div></div><div class="bar-value">$12,000</div></div>
+            </div>
+            <div class="scenario-note">These totals are ceilings—not project savings. Replacement seats and all platform costs still come out of them.</div>
+          </div>
+
+          <div class="simulator">
+            <div class="card-head"><strong>Concierge payback check</strong><span>Example · adjust assumptions</span></div>
+            <div class="sim-controls">
+              <label class="control-row" for="users"><span class="control-top"><span>Occasional users replacing $20 seats</span><span class="control-value" id="usersOut">35</span></span><input id="users" type="range" min="0" max="60" value="35" step="1"></label>
+              <label class="control-row" for="runtime"><span class="control-top"><span>API + monthly operations</span><span class="control-value" id="runtimeOut">$500</span></span><input id="runtime" type="range" min="0" max="2500" value="500" step="50"></label>
+              <label class="control-row" for="build"><span class="control-top"><span>One-time build cost</span><span class="control-value" id="buildOut">$12,000</span></span><input id="build" type="range" min="0" max="60000" value="12000" step="1000"></label>
+              <label class="control-row" for="labor"><span class="control-top"><span>Measured labor value / month</span><span class="control-value" id="laborOut">$0</span></span><input id="labor" type="range" min="0" max="10000" value="0" step="100"></label>
+            </div>
+            <div class="sim-result" aria-live="polite">
+              <div class="result-cell"><div class="result-label">Avoided seats</div><div class="result-value" id="avoidedOut">$700</div></div>
+              <div class="result-cell"><div class="result-label">Net value / mo</div><div class="result-value" id="netOut">$200</div></div>
+              <div class="result-cell"><div class="result-label">Payback</div><div class="result-value" id="paybackOut">60 mo</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="formula"><span><span class="plus">avoided seats + measured labor value</span> &nbsp;&gt;&nbsp; <span class="minus">API + operations + build amortization</span></span></div>
+      </section>
+
+      <section class="chapter" id="architecture">
+        <div class="chapter-head">
+          <div>
+            <div class="chapter-index">03 / Conditional architecture</div>
+            <h2>If the gate passes, use two lanes.</h2>
+          </div>
+          <div class="chapter-intro"><p>Direct users get the least expensive named seat that meets measured demand. Occasional users can submit bounded work through Teams—but only after a pilot proves that the API and automation economics work.</p></div>
+        </div>
+
+        <figure class="diagram" aria-labelledby="architecture-title">
+          <div class="diagram-bar"><span class="diagram-title" id="architecture-title">Target operating model</span><span class="diagram-meta">Conditional on Gate 2 approval</span></div>
+          <div class="architecture">
+            <div class="lane">
+              <div class="lane-tag">Lane A<br>Direct users</div>
+              <div class="node-chain direct">
+                <div class="node"><div class="node-kicker">Employee</div><div><div class="node-name">Named user</div><div class="node-meta">SSO · attributable</div></div></div>
+                <div class="node standard"><div class="node-kicker">Measured tier</div><div><div class="node-name">Standard / Premium</div><div class="node-meta">Quarterly review</div></div></div>
+                <div class="node repo"><div class="node-kicker">Work surface</div><div><div class="node-name">Claude + repositories</div><div class="node-meta">Normal human workflow</div></div></div>
+              </div>
+            </div>
+
+            <div class="lane">
+              <div class="lane-tag">Lane B<br>Occasional users</div>
+              <div class="node-chain">
+                <div class="node teams"><div class="node-kicker">Request</div><div><div class="node-name">Microsoft Teams</div><div class="node-meta">Entra identity</div></div></div>
+                <div class="node concierge pulse"><div class="node-kicker">Control point</div><div><div class="node-name">RMS Concierge</div><div class="node-meta">Budget · policy · routing</div></div></div>
+                <div class="node agent"><div class="node-kicker">Execution</div><div><div class="node-name">Claude agent</div><div class="node-meta">Scoped API workspace</div></div></div>
+                <div class="node repo"><div class="node-kicker">Change</div><div><div class="node-name">Branch + checks</div><div class="node-meta">GitHub App</div></div></div>
+                <div class="node pr"><div class="node-kicker">Review</div><div><div class="node-name">Pull request</div><div class="node-meta">Human merge gate</div></div></div>
+              </div>
+            </div>
+
+            <div class="management-plane">
+              <span class="plane-label">Management plane</span>
+              <span class="chip">Workspace caps</span><span class="chip">Per-request attribution</span><span class="chip">Model routing</span><span class="chip">Azure Key Vault</span><span class="chip">Repo scope</span><span class="chip">Quarterly review</span>
+            </div>
+          </div>
+          <figcaption class="diagram-foot">SAFETY BOUNDARY → Branches only · checks required · human review remains.</figcaption>
+        </figure>
+
+        <div class="policy-grid">
+          <article class="policy-card api">
+            <div class="policy-label">Supported base case</div>
+            <h3>Claude Platform API</h3>
+            <p>Scoped credentials, rate and spend controls, predictable attribution, and a supported path for multi-user production automation.</p>
+          </article>
+          <article class="policy-card pool">
+            <div class="policy-label">Excluded without written approval</div>
+            <h3>One pooled Premium seat</h3>
+            <p>A named member, one finite usage pool, shared identity, lost attribution, and a brittle dependency for the whole service.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chapter" id="rollout">
+        <div class="chapter-head">
+          <div>
+            <div class="chapter-index">04 / Rollout</div>
+            <h2>A plan with explicit stop points.</h2>
+          </div>
+          <div class="chapter-intro"><p>Each phase produces evidence for the next. Rightsizing is approved work; everything after it is conditional.</p></div>
+        </div>
+
+        <div class="timeline">
+          <article class="phase"><div class="phase-no">Phase 0</div><div><h3>Discover and right-size</h3><p>Collect invoices and usage, cancel unused accounts, downgrade low-use Max users, and establish the optimized monthly baseline C₀.</p></div><span class="phase-state now">Approve now</span></article>
+          <article class="phase"><div class="phase-no">Gate 1</div><div><h3>Is there still a problem?</h3><p>Stop if subscription rightsizing meets the objective. Continue only for broader access or a credible automation hypothesis.</p></div><span class="phase-state gate">Stop / go</span></article>
+          <article class="phase"><div class="phase-no">Phase 1</div><div><h3>Consolidate direct users</h3><p>Create the managed Team organization and assign the smallest defensible Standard/Premium seat map.</p></div><span class="phase-state now">Low risk</span></article>
+          <article class="phase"><div class="phase-no">Phase 2</div><div><h3>Run a capped pilot</h3><p>Two repositories, five users, real tasks, hard $100 API cap. Measure cost, success, time saved, review effort, and reliability.</p></div><span class="phase-state hold">Conditional</span></article>
+          <article class="phase"><div class="phase-no">Gate 2</div><div><h3>Require financial approval</h3><p>Approve production only if avoided seats plus quantified labor value exceed the full recurring and amortized cost inside the target payback period.</p></div><span class="phase-state gate">Finance gate</span></article>
+          <article class="phase"><div class="phase-no">Phase 3</div><div><h3>Roll out by department</h3><p>Keep hard caps, named ownership, supported task types, quarterly reviews, and a rollback path.</p></div><span class="phase-state hold">If approved</span></article>
+        </div>
+      </section>
+
+      <section class="chapter" id="inputs">
+        <div class="chapter-head">
+          <div>
+            <div class="chapter-index">05 / Management inputs</div>
+            <h2>Six facts before one build decision.</h2>
+          </div>
+          <div class="chapter-intro"><p>Headcount is not usage. Management needs a billing and workflow inventory before the seat map, API budget, or ROI can be stated responsibly.</p></div>
+        </div>
+
+        <div class="data-list">
+          <div class="data-item">Actual plan, invoice, billing interval, usage-credit purchases, and renewal commitment for all sixty accounts.</div>
+          <div class="data-item">At least ninety days of active-use and limit-hit evidence for every employee.</div>
+          <div class="data-item">Workflows that genuinely require direct Claude access rather than occasional task submission.</div>
+          <div class="data-item">Fully loaded build cost plus monthly hosting, maintenance, support, and ownership.</div>
+          <div class="data-item">Management's required payback period—recommended decision window: twelve to eighteen months.</div>
+          <div class="data-item">The actual objective: subscription savings, automation productivity, broader access, or a measured combination.</div>
+        </div>
+      </section>
+
+      <section class="chapter" id="decisions">
+        <div class="decision-box">
+          <div class="chapter-index">Executive ask</div>
+          <h2>Approve the evidence path—not the outcome.</h2>
+          <div class="decision-actions">
+            <div class="decision-action"><div class="n">01</div><strong>Audit and right-size now</strong><p>Capture immediate savings and establish the honest baseline.</p></div>
+            <div class="decision-action"><div class="n">02</div><strong>Hold the full build</strong><p>No production Concierge approval before a measured pilot.</p></div>
+            <div class="decision-action"><div class="n">03</div><strong>Reject seat pooling</strong><p>Unless Anthropic approves the exact architecture in writing.</p></div>
+            <div class="decision-action"><div class="n">04</div><strong>Enforce Gate 2</strong><p>Require full-cost payback or quantified automation value.</p></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <span>RMS Claude consolidation · revised 2026-08-31 · internal draft</span>
+    <span>Pricing references: <a href="https://claude.com/pricing" target="_blank" rel="noreferrer">Claude pricing</a> · <a href="https://support.claude.com/en/articles/12004354-purchase-and-manage-seats-on-team-plans" target="_blank" rel="noreferrer">Team seat management</a></span>
+  </footer>
+
+  <script>
+    (() => {
+      const $ = (id) => document.getElementById(id);
+      const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+      const controls = ['users', 'runtime', 'build', 'labor'];
+
+      function update() {
+        const users = Number($('users').value);
+        const runtime = Number($('runtime').value);
+        const build = Number($('build').value);
+        const labor = Number($('labor').value);
+        const avoided = users * 20;
+        const net = avoided + labor - runtime;
+        const payback = net > 0 ? build / net : Infinity;
+
+        $('usersOut').textContent = users;
+        $('runtimeOut').textContent = money.format(runtime);
+        $('buildOut').textContent = money.format(build);
+        $('laborOut').textContent = money.format(labor);
+        $('avoidedOut').textContent = money.format(avoided);
+        $('netOut').textContent = money.format(net);
+        $('netOut').classList.toggle('negative', net <= 0);
+        $('paybackOut').textContent = Number.isFinite(payback) ? `${Math.ceil(payback)} mo` : 'No payback';
+        $('paybackOut').classList.toggle('negative', !Number.isFinite(payback) || payback > 18);
+      }
+
+      controls.forEach((id) => $(id).addEventListener('input', update));
+      update();
+    })();
+  </script>
+</body>
+</html>
