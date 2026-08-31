@@ -59,16 +59,18 @@
 
     .topbar span:last-child { color: var(--muted); }
 
-    .objective {
+    .hero-goal {
       display: grid;
-      grid-template-columns: 110px minmax(0, 760px);
-      gap: clamp(20px, 4vw, 48px);
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: 22px;
       align-items: baseline;
-      padding: 24px 0 26px;
+      max-width: 680px;
+      margin-bottom: 30px;
+      padding-bottom: 28px;
       border-bottom: 1px solid var(--line);
     }
 
-    .objective-label {
+    .hero-goal span {
       color: var(--green);
       font-family: var(--mono);
       font-size: 11px;
@@ -77,11 +79,11 @@
       text-transform: uppercase;
     }
 
-    .objective p {
+    .hero-goal p {
       margin: 0;
       color: #383b35;
-      font-size: clamp(17px, 2vw, 21px);
-      font-weight: 590;
+      font-size: clamp(16px, 1.8vw, 19px);
+      font-weight: 560;
       letter-spacing: -.012em;
       line-height: 1.4;
     }
@@ -660,7 +662,7 @@
       .wrap { width: min(100% - 24px, 1100px); }
       .topbar { min-height: 56px; }
       .topbar span:last-child { display: none; }
-      .objective { grid-template-columns: 1fr; gap: 8px; }
+      .hero-goal { grid-template-columns: 1fr; gap: 7px; }
       .hero { padding-top: 54px; }
       h1 { font-size: clamp(48px, 16vw, 70px); }
       .facts, .steps { grid-template-columns: 1fr; }
@@ -689,14 +691,13 @@
     <span>Management brief · August 2026</span>
   </header>
 
-  <div class="wrap objective" aria-label="Project goal">
-    <span class="objective-label">Goal</span>
-    <p>Reduce company-wide Claude costs without limiting valuable usage or creating security and operational risk.</p>
-  </div>
-
   <main>
     <div class="wrap hero">
       <div>
+        <div class="hero-goal" aria-label="Project goal">
+          <span>Goal</span>
+          <p>Reduce company-wide Claude costs without limiting valuable usage or creating security and operational risk.</p>
+        </div>
         <p class="eyebrow">Recommendation</p>
         <h1>Don’t build it yet.</h1>
         <p class="hero-copy">First cancel unused accounts and downgrade low-use Max users. Consider a Concierge only after a short pilot proves it saves more money and employee time than it costs.</p>
