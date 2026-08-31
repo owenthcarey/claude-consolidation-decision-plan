@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A management decision brief for right-sizing Claude accounts and deciding whether to build an internal Concierge.">
+  <meta name="description" content="A management decision brief for reducing Claude costs and safely governing AI-assisted coding by occasional users.">
   <title>Claude Consolidation — Management Decision Brief</title>
   <style>
     :root {
@@ -110,7 +110,7 @@
     h1 {
       max-width: 760px;
       margin: 0;
-      font-size: clamp(52px, 8.4vw, 104px);
+      font-size: clamp(52px, 7vw, 88px);
       font-weight: 650;
       letter-spacing: -.065em;
       line-height: .92;
@@ -257,15 +257,49 @@
       transform: rotate(45deg);
     }
 
-    .gate {
+    .gates-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
       margin-top: 30px;
-      padding: 26px 28px;
-      border-left: 5px solid var(--amber);
-      background: var(--amber-soft);
-      font-size: clamp(18px, 2vw, 23px);
     }
 
-    .gate strong { color: #5d320e; }
+    .decision-gate {
+      padding: 26px 28px;
+      border: 1px solid #c5a67f;
+      border-left: 5px solid var(--amber);
+      background: var(--amber-soft);
+    }
+
+    .decision-gate.safety {
+      border-color: #94ad9a;
+      border-left-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .gate-label {
+      display: block;
+      margin-bottom: 14px;
+      color: #6d3b10;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .decision-gate.safety .gate-label { color: var(--green); }
+
+    .decision-gate strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: clamp(19px, 2vw, 23px);
+      letter-spacing: -.025em;
+      line-height: 1.15;
+    }
+
+    .decision-gate p { margin: 0; color: #625444; font-size: 14px; }
+    .decision-gate.safety p { color: #3c5145; }
 
     .calculator-section { border-top: 1px solid var(--line); }
 
@@ -567,6 +601,65 @@
 
     .arch-key.api-key::before { background: var(--amber); }
 
+    .safety-stack {
+      margin-top: 20px;
+      padding: clamp(26px, 4vw, 40px);
+      background: #1e2721;
+      color: white;
+    }
+
+    .safety-stack-head {
+      display: grid;
+      grid-template-columns: 1fr minmax(260px, .7fr);
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    .safety-stack-head span {
+      color: #9dc0a7;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .safety-stack h3 {
+      margin: 10px 0 0;
+      font-size: clamp(28px, 4vw, 43px);
+      letter-spacing: -.045em;
+      line-height: 1;
+    }
+
+    .safety-stack-head p { margin: 0; color: #bbc7bf; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid #536158;
+      border-left: 1px solid #536158;
+    }
+
+    .skill-item {
+      min-width: 0;
+      padding: 22px;
+      border-right: 1px solid #536158;
+      border-bottom: 1px solid #536158;
+    }
+
+    .skill-item span {
+      display: block;
+      margin-bottom: 24px;
+      color: #89ae94;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .skill-item strong { display: block; margin-bottom: 6px; font-size: 16px; }
+    .skill-item p { margin: 0; color: #aebbb2; font-size: 13px; }
+
     .warning {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -639,6 +732,8 @@
       .step::after { display: none; }
       .result { border-top: 1px solid var(--line); border-left: 0; }
       .model-grid { grid-template-columns: 1fr; }
+      .gates-grid, .safety-stack-head { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
       .arch-lane { grid-template-columns: minmax(0, 1fr); justify-items: center; }
       .arch-node { width: min(100%, 390px); min-height: 82px; }
       .arch-wire { width: 1px; height: 26px; }
@@ -673,6 +768,7 @@
       .inputs { grid-template-columns: 1fr; padding: 24px; }
       .result { padding: 28px 24px; }
       .warning { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; }
     }
 
@@ -694,21 +790,21 @@
 
   <div class="wrap goal-card" aria-label="Project goal">
     <span>Goal</span>
-    <p>Reduce company-wide Claude costs without limiting valuable usage or creating security and operational risk.</p>
+    <p>Reduce company-wide Claude costs while giving occasional, often non-technical employees a safer way to build internal software.</p>
   </div>
 
   <main>
     <div class="wrap hero">
       <div>
         <p class="eyebrow">Recommendation</p>
-        <h1>Don’t build it yet.</h1>
-        <p class="hero-copy">First cancel unused accounts and downgrade low-use Max users. Consider a Concierge only after a short pilot proves it saves more money and employee time than it costs.</p>
+        <h1>Audit first. Pilot safety second.</h1>
+        <p class="hero-copy">Right-size accounts now. Then run a small Concierge pilot to test whether built-in safety skills reduce risky changes and routine review effort at an acceptable cost.</p>
       </div>
 
       <aside class="decision-card" aria-label="Recommended management decision">
         <span class="tag">Approve now</span>
-        <strong>A 30-day account audit.</strong>
-        <p>Not a software build. The audit reveals the real baseline, easy savings, and whether a Concierge is worth testing.</p>
+        <strong>An audit, then a scoped safety pilot.</strong>
+        <p>Measure usage, risks caught before review, review time, and operating cost before funding a full build.</p>
       </aside>
     </div>
 
@@ -718,8 +814,8 @@
         <span>Usage and plan mix still unknown</span>
       </div>
       <div class="fact">
-        <strong>$200/mo</strong>
-        <span>Example margin before hosting and maintenance</span>
+        <strong>2 gates</strong>
+        <span>Financial viability and demonstrable safety</span>
       </div>
       <div class="fact">
         <strong>≤ 12 months</strong>
@@ -731,9 +827,9 @@
       <div class="section-head">
         <div>
           <p class="section-label">The sequence</p>
-          <h2>Right-size first. Automate second.</h2>
+          <h2>Right-size first. Add guardrails second.</h2>
         </div>
-        <p class="section-intro">License savings alone may be too small to justify custom software. Start with the changes that require no software, then measure what remains.</p>
+        <p class="section-intro">License savings are only half the case. A pilot must also prove that the Concierge makes occasional users safer and easier to supervise.</p>
       </div>
 
       <div class="steps" aria-label="Four-step decision process">
@@ -749,17 +845,28 @@
         </article>
         <article class="step">
           <span class="step-num">03</span>
-          <h3>Pilot</h3>
-          <p>Test a small API Concierge with occasional users only.</p>
+          <h3>Safety pilot</h3>
+          <p>Test built-in skills with a small group of occasional users.</p>
         </article>
         <article class="step">
           <span class="step-num">04</span>
           <h3>Decide</h3>
-          <p>Build only if measured savings meet the payback target.</p>
+          <p>Fund a full build only if both decision gates are met.</p>
         </article>
       </div>
 
-      <div class="gate"><strong>The build gate:</strong> avoided seat cost + verified labor savings must exceed API usage + hosting + maintenance + build cost within the target payback period.</div>
+      <div class="gates-grid" aria-label="Financial and safety decision gates">
+        <article class="decision-gate">
+          <span class="gate-label">Financial gate</span>
+          <strong>The measurable value must repay the investment.</strong>
+          <p>Avoided seats + time saved must exceed API, hosting, maintenance, and build cost within the target period.</p>
+        </article>
+        <article class="decision-gate safety">
+          <span class="gate-label">Safety gate</span>
+          <strong>The controls must reduce risk before review.</strong>
+          <p>The pilot must reduce risky changes and routine review effort without weakening review for high-risk code.</p>
+        </article>
+      </div>
     </section>
 
     <section class="calculator-section" id="calculator">
@@ -767,9 +874,9 @@
         <div class="section-head">
           <div>
             <p class="section-label">Quick financial check</p>
-            <h2>Would it pay back?</h2>
+            <h2>Would a full build pay back?</h2>
           </div>
-          <p class="section-intro">Use real numbers after the audit. The defaults illustrate why license savings alone may not support a build.</p>
+          <p class="section-intro">Use real numbers after the audit. This tests the financial gate only; the safety gate is measured separately during the pilot.</p>
         </div>
 
         <div class="calculator">
@@ -796,8 +903,8 @@
 
           <div class="result" aria-live="polite">
             <div>
-              <span class="result-label">Decision</span>
-              <h3 id="decision">Do not build yet</h3>
+              <span class="result-label">Financial gate</span>
+              <h3 id="decision">Not met yet</h3>
               <p id="decisionNote">At this margin, the project would take 60 months to repay its build cost.</p>
             </div>
             <div class="math" aria-label="Calculation summary">
@@ -808,29 +915,29 @@
           </div>
         </div>
 
-        <p class="example">Example: 35 seats × $20 = $700 avoided. Minus $500 of monthly API and operating costs leaves only $200 before maintenance—unlikely to justify a custom build.</p>
+        <p class="example">Example: 35 seats × $20 = $700 avoided. Minus $500 of monthly API and operating costs leaves only $200 before maintenance—unlikely to justify a full build. Safety benefits should be measured in the pilot, not inflated into an assumed dollar value.</p>
       </div>
     </section>
 
     <section class="wrap" id="access">
       <div class="section-head">
         <div>
-          <p class="section-label">If a pilot is justified</p>
-          <h2>Use two clean access paths.</h2>
+          <p class="section-label">How access would work</p>
+          <h2>Use two accountable access paths.</h2>
         </div>
-        <p class="section-intro">The access model should match how people actually work, without relying on shared credentials.</p>
+        <p class="section-intro">Daily users keep the normal development and review process. Occasional users receive additional controls before their work reaches an engineer.</p>
       </div>
 
       <div class="model-grid">
         <article class="model-card">
           <span class="small">Daily individual use</span>
           <h3>Named Team seats</h3>
-          <p>Keep dedicated Standard or Premium seats for people whose usage clearly supports the cost.</p>
+          <p>Regular technical users work in their own Claude environment and follow the company’s normal code-review process.</p>
         </article>
         <article class="model-card">
-          <span class="small">Occasional + automated use</span>
-          <h3>API Concierge</h3>
-          <p>Give lighter users a controlled interface and use the API for shared workflows such as Teams-to-PR automation.</p>
+          <span class="small">Occasional + non-technical use</span>
+          <h3>Governed API Concierge</h3>
+          <p>Lighter users work through a controlled interface with safety skills applied automatically before a pull request is created.</p>
         </article>
       </div>
 
@@ -838,7 +945,7 @@
         <div class="arch-head">
           <div>
             <span>Request flow</span>
-            <strong>One destination. Two accountable paths.</strong>
+            <strong>Two paths. Extra guardrails where risk is highest.</strong>
           </div>
           <span class="live-badge">Illustrative flow</span>
         </div>
@@ -856,13 +963,13 @@
             </div>
             <div class="arch-wire" aria-hidden="true"><i class="packet"></i></div>
             <div class="arch-node">
-              <span>Workspace</span>
-              <strong>Individual history</strong>
+              <span>Development</span>
+              <strong>Claude app + IDE</strong>
             </div>
             <div class="arch-wire" aria-hidden="true"><i class="packet"></i></div>
             <div class="arch-node api">
-              <span>Destination</span>
-              <strong>Claude app</strong>
+              <span>Review</span>
+              <strong>Normal code review</strong>
             </div>
           </div>
 
@@ -878,20 +985,63 @@
             </div>
             <div class="arch-wire" aria-hidden="true"><i class="packet"></i></div>
             <div class="arch-node control">
-              <span>Guardrails</span>
-              <strong>Identity · limits · logs</strong>
+              <span>Before review</span>
+              <strong>Safety skill stack</strong>
             </div>
             <div class="arch-wire" aria-hidden="true"><i class="packet"></i></div>
             <div class="arch-node api">
-              <span>Metered access</span>
-              <strong>Claude API</strong>
+              <span>Controlled output</span>
+              <strong>PR + risk-based review</strong>
             </div>
           </div>
         </div>
 
         <div class="arch-legend" aria-hidden="true">
-          <span class="arch-key">Dedicated seat activity</span>
-          <span class="arch-key api-key">Metered API request</span>
+          <span class="arch-key">Normal developer workflow</span>
+          <span class="arch-key api-key">Governed occasional-user workflow</span>
+        </div>
+      </div>
+
+      <div class="safety-stack">
+        <div class="safety-stack-head">
+          <div>
+            <span>Built-in safety skills</span>
+            <h3>Controls applied before an engineer sees the code.</h3>
+          </div>
+          <p>The goal is less routine review effort—not less scrutiny for high-risk changes.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-item">
+            <span>01</span>
+            <strong>Scoped access</strong>
+            <p>Only approved repositories, tools, and environments.</p>
+          </article>
+          <article class="skill-item">
+            <span>02</span>
+            <strong>Secure defaults</strong>
+            <p>Vetted templates, patterns, and dependency policies.</p>
+          </article>
+          <article class="skill-item">
+            <span>03</span>
+            <strong>Automated checks</strong>
+            <p>Tests, linting, secret detection, and security scanning.</p>
+          </article>
+          <article class="skill-item">
+            <span>04</span>
+            <strong>PR-only delivery</strong>
+            <p>No direct merge, production access, or deployment.</p>
+          </article>
+          <article class="skill-item">
+            <span>05</span>
+            <strong>Identity + audit</strong>
+            <p>Named users, activity logs, usage limits, and budgets.</p>
+          </article>
+          <article class="skill-item">
+            <span>06</span>
+            <strong>Risk escalation</strong>
+            <p>High-risk changes always require engineering review.</p>
+          </article>
         </div>
       </div>
 
@@ -906,8 +1056,8 @@
 
     <section class="wrap final">
       <div class="final-card">
-        <h2>Approve the audit. Defer the build.</h2>
-        <p>Return to management with real usage, easy savings, pilot cost, and a measured payback case.</p>
+        <h2>Approve the audit and safety pilot. Defer the full build.</h2>
+        <p>Proceed only when the controls reduce risk and routine review effort—and the economics meet the target.</p>
       </div>
     </section>
   </main>
@@ -937,7 +1087,7 @@
       document.getElementById('avoided').textContent = `${money.format(avoided)}/mo`;
       document.getElementById('net').textContent = `${money.format(net)}/mo`;
       document.getElementById('payback').textContent = Number.isFinite(payback) ? `${Math.ceil(payback)} months` : 'No payback';
-      document.getElementById('decision').textContent = passes ? 'Pilot may be justified' : 'Do not build yet';
+      document.getElementById('decision').textContent = passes ? 'Gate may be met' : 'Not met yet';
 
       const note = document.getElementById('decisionNote');
       if (net <= 0) {
