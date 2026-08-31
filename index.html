@@ -59,6 +59,33 @@
 
     .topbar span:last-child { color: var(--muted); }
 
+    .objective {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 760px);
+      gap: clamp(20px, 4vw, 48px);
+      align-items: baseline;
+      padding: 24px 0 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .objective-label {
+      color: var(--green);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .objective p {
+      margin: 0;
+      color: #383b35;
+      font-size: clamp(17px, 2vw, 21px);
+      font-weight: 590;
+      letter-spacing: -.012em;
+      line-height: 1.4;
+    }
+
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 1.45fr) minmax(300px, .7fr);
@@ -633,6 +660,7 @@
       .wrap { width: min(100% - 24px, 1100px); }
       .topbar { min-height: 56px; }
       .topbar span:last-child { display: none; }
+      .objective { grid-template-columns: 1fr; gap: 8px; }
       .hero { padding-top: 54px; }
       h1 { font-size: clamp(48px, 16vw, 70px); }
       .facts, .steps { grid-template-columns: 1fr; }
@@ -660,6 +688,11 @@
     <span>RMS / Claude cost decision</span>
     <span>Management brief · August 2026</span>
   </header>
+
+  <div class="wrap objective" aria-label="Project goal">
+    <span class="objective-label">Goal</span>
+    <p>Reduce company-wide Claude costs without limiting valuable usage or creating security and operational risk.</p>
+  </div>
 
   <main>
     <div class="wrap hero">
